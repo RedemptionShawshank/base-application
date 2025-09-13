@@ -26,29 +26,12 @@ public class DataService {
         this.companyRepository = companyRepository;
         this.outboxRepository = outboxRepository;
     }
-
-
-
-    // always calls transactional method from another class(why?)
-    //
-    @Synchronized
-    @Transactional
-    public boolean addInDB(Company input){
-
-        try {
-            databaseOperations(input);
-        }catch (RuntimeException ex){
-            throw new RuntimeException("yoyoyy");
-        }
-
-
-        return true;
-    }
     // transactional method should always be private
      // call transactional method from another class else if you call it from same class it will bypass proxy and will not start a transaction
      // if try catch is there in transactional method, rollback will not work
 
-    private void databaseOperations(Company input){
+    @Transactional
+    public void databaseOperations(Company input){
 
         //add in my db table
         companyRepository.save(input);
@@ -68,8 +51,6 @@ public class DataService {
         // if other operations
         outboxRepository.save(message);
         // how to store the exact time at which we store in out db
-        if(true){
-            throw new RuntimeException("Custom exception");
-        }
+
     }
 }
