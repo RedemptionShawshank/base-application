@@ -18,7 +18,7 @@ public class OutboxTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @Column(name = "Message",columnDefinition = "json")
     private String message;
