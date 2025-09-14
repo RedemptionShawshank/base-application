@@ -29,7 +29,10 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/register").permitAll()
-                        .requestMatchers("/data/user_info").permitAll()
+                        .requestMatchers("/data/user_info1").permitAll()
+                        .requestMatchers("/data/get_info1").permitAll()
+                        .requestMatchers("/data/user_info2").permitAll()
+                        .requestMatchers("/data/get_info2").permitAll()
                         .requestMatchers("/auth").hasRole("USER")// 👈 use /** so nested paths work
                         .anyRequest().authenticated()
                 )
